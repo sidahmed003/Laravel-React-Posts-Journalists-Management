@@ -1,0 +1,59 @@
+/* Mise en page principale */
+.container {
+    display: flex;
+    height: 100vh;
+    background-color: #0A192F;
+    color: white;
+  }
+  
+  /* Partie gauche - Posts */
+  .posts-container {
+    width: 65%;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .post {
+    background: #112240;
+    border-left: 6px solid #64ffda;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .post:hover {
+    transform: scale(1.02);
+  }
+  
+  .post-title h2 {
+    font-size: 1.4rem;
+    text-align: right;
+    margin-bottom: 10px;
+    color: #64ffda;
+  }
+  
+  /* Partie droite - Diaporama (pleine largeur et hauteur) */
+  .slideshow {
+    width: 35%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .slideshow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit toute la zone sans déformation */
+    border-radius: 0; /* Supprime les bords arrondis */
+    box-shadow: none; /* Supprime l'ombre pour un effet plus net */
+  }
+  
