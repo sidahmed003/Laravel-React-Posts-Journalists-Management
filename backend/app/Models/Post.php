@@ -9,6 +9,15 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = [
+        'title',
+        'content',
+        'user_id' // Ajout de user_id aux colonnes remplissables
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
