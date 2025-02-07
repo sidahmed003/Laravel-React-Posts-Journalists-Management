@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api";
-import "./Home.css";
+import "./User.css";
 
-function Home() {
+function User() {
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Charger les posts
+    // Charger les posts de l'utilisateur connecté
     useEffect(() => {
-        api.get('/posts')
+        api.get('/user/posts') // Assurez-vous que cette route retourne les posts de l'utilisateur connecté
             .then(response => {
                 setPosts(response.data);
             })
             .catch(error => {
                 console.error('Erreur API :', error);
-                setError('Erreur lors du chargement des posts');
+                setError('Erreur lors du chargement de vos posts');
             });
     }, []);
 
@@ -39,10 +39,11 @@ function Home() {
         <div className="container">
             {/* Partie gauche - Posts */}
             <div className="posts-container">
-                <div className="header">
-                    <h1>Last Posts</h1>
-                    <Link to="/login" className="login-button">Se connecter</Link>
+                <div className="user-header">
+                    <Link to="/ajouter-post" className="user-btn">Ajouter un Post</Link>
+                    <Link to="/mes-posts" className="user-btn">Mes Posts</Link>
                 </div>
+                <h1>Mes Posts</h1>
                 {error && <p className="error">{error}</p>}
                 {posts.length > 0 ? (
                     posts.map(post => (
@@ -66,4 +67,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default User;
