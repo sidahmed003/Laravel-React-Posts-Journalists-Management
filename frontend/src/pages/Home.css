@@ -13,17 +13,17 @@
   overflow-y: auto;
 }
 
-/* En-tête avec le bouton de connexion */
+/* En-tête avec les boutons de connexion et d'inscription */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-h1 {
-  font-size: 2rem;
-  text-align: left;
-  margin-bottom: 20px;
+/* Regroupe les boutons de connexion et d'inscription */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
 }
 
 /* Bouton Se connecter */
@@ -38,6 +38,21 @@ h1 {
 }
 
 .login-button:hover {
+  background-color: #52e0c0;
+}
+
+/* Bouton S'inscrire */
+.register-button {
+  background-color: #64ffda;
+  color: #0A192F;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.register-button:hover {
   background-color: #52e0c0;
 }
 

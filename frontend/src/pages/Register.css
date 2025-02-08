@@ -1,0 +1,89 @@
+/* Mise en page principale */
+.register-container {
+    display: flex;
+    height: 100vh;
+    background-color: #0A192F;
+    color: white;
+}
+
+/* Partie gauche - Formulaire */
+.register-form-container {
+    width: 50%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Champs du formulaire */
+.register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+/* Bouton d'inscription */
+.register-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #64ffda;
+    color: #0A192F;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.register-form button:hover {
+    background-color: #52e0c0;
+}
+
+/* Message d'erreur */
+.error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+/* Lien vers la connexion */
+.login-link {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.login-link a {
+    color: #64ffda;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Partie droite - Diaporama */
+.register-slideshow {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slideshow-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: none;
+}

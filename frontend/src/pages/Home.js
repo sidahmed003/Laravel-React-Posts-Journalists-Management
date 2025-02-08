@@ -41,7 +41,10 @@ function Home() {
             <div className="posts-container">
                 <div className="header">
                     <h1>Last Posts</h1>
-                    <Link to="/login" className="login-button">Se connecter</Link>
+                    <div className="auth-buttons">
+                        <Link to="/login" className="login-button">Se connecter</Link>
+                        <Link to="/register" className="register-button">S'inscrire</Link>
+                    </div>
                 </div>
                 {error && <p className="error">{error}</p>}
                 {posts.length > 0 ? (

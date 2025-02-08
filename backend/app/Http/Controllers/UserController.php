@@ -29,21 +29,28 @@ class UserController extends Controller
 
     // Créer un utilisateur
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:8|confirmed'
+    ]);
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']), // Hachage du mot de passe
-        ]);
+    $user = User::create([
+        'name' => $validated['name'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password'])
+    ]);
 
-        return response()->json($user, 201);
-    }
+    // Générer un token
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'user' => $user,
+        'token' => $token
+    ]);
+}
+
 
     // Mettre à jour un utilisateur
     public function update(Request $request, $id)

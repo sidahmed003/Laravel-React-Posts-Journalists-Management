@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import User from "../pages/User"; // Ajout de la page utilisateur après connexion
+import User from "../pages/User"; 
+import Register from "../pages/Register"; 
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: <User />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 
