@@ -8,15 +8,15 @@ function User() {
     const [error, setError] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Charger les posts de l'utilisateur connecté
+    // Charger les derniers posts de tous les utilisateurs
     useEffect(() => {
-        api.get('/user/posts') // Assurez-vous que cette route retourne les posts de l'utilisateur connecté
+        api.get('/posts') // Mettre à jour la route pour récupérer tous les posts
             .then(response => {
                 setPosts(response.data);
             })
             .catch(error => {
                 console.error('Erreur API :', error);
-                setError('Erreur lors du chargement de vos posts');
+                setError('Erreur lors du chargement des posts');
             });
     }, []);
 
@@ -43,7 +43,7 @@ function User() {
                     <Link to="/ajouter-post" className="user-btn">Ajouter un Post</Link>
                     <Link to="/mes-posts" className="user-btn">Mes Posts</Link>
                 </div>
-                <h1>Mes Posts</h1>
+                <h1>Last Posts</h1>
                 {error && <p className="error">{error}</p>}
                 {posts.length > 0 ? (
                     posts.map(post => (
