@@ -14,3 +14,5 @@ Route::apiResource('posts', PostController::class);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::post('/register', [UserController::class, 'store']);
+
+Route::get('/user/{id}/posts', [PostController::class, 'getUserPosts']);

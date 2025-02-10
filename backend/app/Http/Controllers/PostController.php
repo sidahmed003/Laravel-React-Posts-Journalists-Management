@@ -43,4 +43,10 @@ class PostController extends Controller
         Post::destroy($id);
         return response()->json(null, 204);
     }
+
+    public function getUserPosts($id) {
+        $posts = Post::where('user_id', $id)->orderBy('created_at', 'desc')->get();
+        return response()->json($posts);
+    }
+    
 }

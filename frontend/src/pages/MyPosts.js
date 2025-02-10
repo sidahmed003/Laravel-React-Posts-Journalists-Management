@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
-import "./User.css";
+import "./MyPosts.css";
 
-function User() {
+function MyPosts() {
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const navigate = useNavigate();
 
+    // Vérifier si l'utilisateur est connecté
     const user = JSON.parse(localStorage.getItem("user"));
 
-    // Charger les derniers posts de tous les utilisateurs
     useEffect(() => {
-        api.get('/posts') // Mettre à jour la route pour récupérer tous les posts
+        if (!user) {
+            navigate("/login"); // Redirige vers la connexion si l'utilisateur n'est pas authentifié
+            return;
+        }
+
+        // Charger uniquement les posts de l'utilisateur connecté
+        api.get(`/user/${user.id}/posts`) // Assurez-vous que cette route existe dans Laravel
             .then(response => {
                 setPosts(response.data);
             })
             .catch(error => {
                 console.error('Erreur API :', error);
-                setError('Erreur lors du chargement des posts');
+                setError('Erreur lors du chargement de vos posts.');
             });
-    }, []);
+    }, [navigate, user]);
 
-    // Liste des images dans /src/photos
+    // Liste des images du diaporama
     const images = [
         require('../photos/image2.jfif'),
         require('../photos/image3.jfif'),
@@ -38,14 +45,10 @@ function User() {
     }, [images.length]);
 
     return (
-        <div className="container">
-            {/* Partie gauche - Posts */}
+        <div className="myposts-container">
+            {/* Partie gauche - Posts de l'utilisateur */}
             <div className="posts-container">
-                <div className="user-header">
-                    <Link to="/ajouter-post" className="user-btn">Ajouter un Post</Link>
-                    <Link to="/myposts" className="user-btn">Mes Posts</Link>
-                </div>
-                <h1>Last Posts</h1>
+                <h1>{user ? user.name : "Utilisateur"} - Mes Posts</h1>
                 {error && <p className="error">{error}</p>}
                 {posts.length > 0 ? (
                     posts.map(post => (
@@ -57,7 +60,7 @@ function User() {
                         </div>
                     ))
                 ) : (
-                    <p className="no-posts">Aucun post trouvé.</p>
+                    <p className="no-posts">Vous n'avez pas encore publié de posts.</p>
                 )}
             </div>
 
@@ -69,4 +72,4 @@ function User() {
     );
 }
 
-export default User;
+export default MyPosts;

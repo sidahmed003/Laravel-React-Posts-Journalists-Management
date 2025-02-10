@@ -1,0 +1,53 @@
+.myposts-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: #0A192F;
+    color: white;
+    padding: 20px;
+}
+
+.posts-container {
+    width: 50%;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #64ffda;
+}
+
+.post {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.post-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #64ffda;
+}
+
+.error {
+    color: red;
+}
+
+.no-posts {
+    font-style: italic;
+    color: #aaa;
+}
+
+.slideshow {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slideshow-image {
+    width: 70%;
+    border-radius: 10px;
+}
