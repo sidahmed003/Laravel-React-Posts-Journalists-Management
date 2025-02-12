@@ -1,96 +1,114 @@
-/* Mise en page principale */
 .container {
   display: flex;
-  height: 100vh;
-  background-color: #0A192F;
-  color: white;
-}
-
-/* Partie gauche - Posts */
-.posts-container {
-  width: 65%;
+  justify-content: space-between;
   padding: 20px;
-  overflow-y: auto;
 }
 
-/* En-tête avec les boutons de connexion et d'inscription */
+.posts-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-/* Regroupe les boutons de connexion et d'inscription */
-.auth-buttons {
-  display: flex;
-  gap: 15px;
+.auth-buttons a {
+  margin-left: 10px;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
 }
 
-/* Bouton Se connecter */
 .login-button {
-  background-color: #64ffda;
-  color: #0A192F;
-  text-decoration: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background 0.3s;
+  background-color: #007bff;
 }
 
-.login-button:hover {
-  background-color: #52e0c0;
-}
-
-/* Bouton S'inscrire */
 .register-button {
-  background-color: #64ffda;
-  color: #0A192F;
-  text-decoration: none;
-  padding: 10px 15px;
+  background-color: #28a745;
+}
+
+/* Barre de recherche */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
   border-radius: 5px;
-  font-weight: bold;
-  transition: background 0.3s;
+  outline: none;
+  transition: 0.3s;
 }
 
-.register-button:hover {
-  background-color: #52e0c0;
+.search-bar input:focus {
+  border-color: #007bff;
 }
 
-/* Styles des posts */
+/* Posts */
 .post {
-  background: #112240;
-  border-left: 6px solid #64ffda;
-  padding: 20px;
+  background: #f9f9f9;
+  padding: 15px;
   margin-bottom: 15px;
-  border-radius: 10px;
-  transition: transform 0.3s;
-}
-
-.post:hover {
-  transform: scale(1.02);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .post-title h2 {
-  font-size: 1.4rem;
-  text-align: right;
-  margin-bottom: 10px;
-  color: #64ffda;
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #333;
 }
 
-/* Partie droite - Diaporama (pleine largeur et hauteur) */
+/* Diaporama */
 .slideshow {
-  width: 35%;
-  height: 100vh;
+  width: 300px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
 .slideshow-image {
   width: 100%;
+  border-radius: 10px;
+}
+
+
+/* S'assurer que tout prend la hauteur complète */
+body, html {
+  margin: 0;
+  padding: 0;
   height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  box-shadow: none;
+  background-color: #f9f9f9; /* Garde un fond clair */
+}
+
+/* Ajuster le container principal */
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  min-height: 100vh; /* Assure que ça prend toute la hauteur de l'écran */
+}
+
+/* Corriger la hauteur de la liste des posts */
+.posts-container {
+  flex: 1;
+  overflow-y: auto; /* Ajoute un défilement si besoin */
+  max-height: calc(100vh - 100px); /* Ajuste pour éviter que ça déborde */
+  padding-bottom: 20px;
+}
+
+/* Empêcher le blanc en bas */
+.posts-container::after {
+  content: "";
+  display: block;
+  height: 20px; /* Ajoute une marge pour éviter les coupures visuelles */
 }

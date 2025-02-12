@@ -5,14 +5,17 @@ import "./Home.css";
 
 function Home() {
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const [error, setError] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    // Charger les posts
+    // Charger les posts depuis l'API
     useEffect(() => {
         api.get('/posts')
             .then(response => {
                 setPosts(response.data);
+                setFilteredPosts(response.data); // Initialiser avec tous les posts
             })
             .catch(error => {
                 console.error('Erreur API :', error);
@@ -20,7 +23,16 @@ function Home() {
             });
     }, []);
 
-    // Liste des images dans /src/photos
+    // Mettre à jour les posts affichés en fonction du mot-clé
+    useEffect(() => {
+        const filtered = posts.filter(post =>
+            post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            post.content.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredPosts(filtered);
+    }, [searchTerm, posts]);
+
+    // Liste des images pour le diaporama
     const images = [
         require('../photos/image2.jfif'),
         require('../photos/image3.jfif'),
@@ -46,9 +58,20 @@ function Home() {
                         <Link to="/register" className="register-button">S'inscrire</Link>
                     </div>
                 </div>
+
+                {/* Barre de recherche */}
+                <div className="search-bar">
+                    <input
+                        type="text"
+                        placeholder="Rechercher un post..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+
                 {error && <p className="error">{error}</p>}
-                {posts.length > 0 ? (
-                    posts.map(post => (
+                {filteredPosts.length > 0 ? (
+                    filteredPosts.map(post => (
                         <div key={post.id} className="post">
                             <div className="post-title">
                                 <h2>{post.title}</h2>
