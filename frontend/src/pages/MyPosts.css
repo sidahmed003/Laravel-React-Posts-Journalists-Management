@@ -1,53 +1,64 @@
+/* MyPosts.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #1b1f3b;
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* On change .container en .myposts-container */
 .myposts-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    background-color: #0A192F;
-    color: white;
     padding: 20px;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
-.posts-container {
-    width: 50%;
+/* Même chose ici pour éviter les conflits */
+.myposts-posts-container {
+    width: 60%;
+    overflow-y: auto;
 }
 
-h1 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #64ffda;
+.myposts-search-bar {
+    position: relative;
+    top: 0;
+    background-color: #1b1f3b;
+    padding: 10px;
+    z-index: 1000;
 }
 
-.post {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.post-title h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #64ffda;
-}
-
-.error {
-    color: red;
-}
-
-.no-posts {
-    font-style: italic;
-    color: #aaa;
-}
-
-.slideshow {
-    width: 50%;
+.myposts-slideshow {
+    width: 35%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: flex-end;
 }
 
-.slideshow-image {
-    width: 70%;
+.myposts-slideshow-image {
+    width: 90%;
+    max-height: 400px;
     border-radius: 10px;
+}
+
+.myposts-post {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.myposts-post-title h2 {
+    color: #06e2cc;
+    margin: 0;
+}
+
+.myposts-no-posts {
+    text-align: center;
+    font-style: italic;
 }

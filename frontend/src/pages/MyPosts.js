@@ -5,7 +5,9 @@ import "./MyPosts.css";
 
 function MyPosts() {
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const [error, setError] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const navigate = useNavigate();
 
@@ -22,12 +24,22 @@ function MyPosts() {
         api.get(`/user/${user.id}/posts`) // Assurez-vous que cette route existe dans Laravel
             .then(response => {
                 setPosts(response.data);
+                setFilteredPosts(response.data); // Initialiser avec tous les posts
             })
             .catch(error => {
                 console.error('Erreur API :', error);
                 setError('Erreur lors du chargement de vos posts.');
             });
     }, [navigate, user]);
+
+    // Filtrer les posts en fonction du mot-clé
+    useEffect(() => {
+        const filtered = posts.filter(post =>
+            post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            post.content.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredPosts(filtered);
+    }, [searchTerm, posts]);
 
     // Liste des images du diaporama
     const images = [
@@ -49,9 +61,20 @@ function MyPosts() {
             {/* Partie gauche - Posts de l'utilisateur */}
             <div className="posts-container">
                 <h1>{user ? user.name : "Utilisateur"} - Mes Posts</h1>
+
+                {/* Barre de recherche */}
+                <div className="search-bar">
+                    <input
+                        type="text"
+                        placeholder="Rechercher un post..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+
                 {error && <p className="error">{error}</p>}
-                {posts.length > 0 ? (
-                    posts.map(post => (
+                {filteredPosts.length > 0 ? (
+                    filteredPosts.map(post => (
                         <div key={post.id} className="post">
                             <div className="post-title">
                                 <h2>{post.title}</h2>
@@ -60,7 +83,7 @@ function MyPosts() {
                         </div>
                     ))
                 ) : (
-                    <p className="no-posts">Vous n'avez pas encore publié de posts.</p>
+                    <p className="no-posts">Aucun post trouvé.</p>
                 )}
             </div>
 
