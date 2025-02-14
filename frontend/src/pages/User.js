@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import "./User.css";
 
@@ -9,8 +9,15 @@ function User() {
     const [error, setError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem("user"));
+
+    // Fonction de déconnexion
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        navigate("/");
+    };
 
     // Charger les derniers posts de tous les utilisateurs
     useEffect(() => {
@@ -54,6 +61,7 @@ function User() {
             {/* Partie gauche - Posts */}
             <div className="posts-container">
                 <div className="user-header">
+                    <button className="logout-btn" onClick={handleLogout}>Se Déconnecter</button>
                     <Link to="/ajouter-post" className="user-btn">Ajouter un Post</Link>
                     <Link to="/myposts" className="user-btn">Mes Posts</Link>
                 </div>

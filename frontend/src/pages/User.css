@@ -68,6 +68,7 @@ body {
     padding: 15px;
     margin: 10px 0;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .post-title h2 {
@@ -90,4 +91,39 @@ body {
 .slideshow-image {
     width: 100%;
     border-radius: 10px;
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1); /* Or */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.user-btn {
+    background-color: rgba(255, 255, 255, 0.1); /* Or */
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #1b1f3b;
+    font-weight: bold;
+}
+
+/* Bouton Se Déconnecter */
+.logout-btn {
+    background-color: red;
+    color: black;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-right: 10px;
+}
+
+.logout-btn:hover {
+    background-color: darkred;
 }
