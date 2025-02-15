@@ -36,10 +36,13 @@ function AddPost() {
             return;
         }
 
+        // Ajouter automatiquement "[ Auteur: Nom de l'utilisateur ]" à la fin du contenu
+        const updatedContent = `${content} [ Auteur: ${user.name} ]`;
+
         try {
             await api.post('/posts', {
                 title,
-                content,
+                content: updatedContent, // Envoyer le contenu modifié
                 user_id: user.id, // Associer le post à l'utilisateur connecté
             });
 
