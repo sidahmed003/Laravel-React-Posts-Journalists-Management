@@ -21,10 +21,10 @@ function MyPosts() {
         }
 
         // Charger uniquement les posts de l'utilisateur connecté
-        api.get(`/user/${user.id}/posts`) // Assurez-vous que cette route existe dans Laravel
+        api.get(`/user/${user.id}/posts`)
             .then(response => {
                 setPosts(response.data);
-                setFilteredPosts(response.data); // Initialiser avec tous les posts
+                setFilteredPosts(response.data);
             })
             .catch(error => {
                 console.error('Erreur API :', error);
@@ -40,6 +40,23 @@ function MyPosts() {
         );
         setFilteredPosts(filtered);
     }, [searchTerm, posts]);
+
+    // Supprimer un post
+    const handleDelete = (postId) => {
+        if (window.confirm("Voulez-vous vraiment supprimer ce post ?")) {
+            api.delete(`/posts/${postId}`)
+                .then(() => {
+                    // Mettre à jour la liste des posts après suppression
+                    const updatedPosts = posts.filter(post => post.id !== postId);
+                    setPosts(updatedPosts);
+                    setFilteredPosts(updatedPosts);
+                })
+                .catch(error => {
+                    console.error("Erreur de suppression :", error);
+                    setError("Impossible de supprimer ce post.");
+                });
+        }
+    };
 
     // Liste des images du diaporama
     const images = [
@@ -76,8 +93,9 @@ function MyPosts() {
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map(post => (
                         <div key={post.id} className="post">
-                            <div className="post-title">
+                            <div className="post-header">
                                 <h2>{post.title}</h2>
+                                <button className="delete-button" onClick={() => handleDelete(post.id)}>Supprimer</button>
                             </div>
                             <p>{post.content}</p>
                         </div>

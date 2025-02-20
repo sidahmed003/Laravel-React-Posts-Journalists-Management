@@ -10,7 +10,7 @@ body, html {
     overflow-x: hidden;
 }
 
-/* On change .container en .myposts-container */
+/* Container principal */
 .myposts-container {
     display: flex;
     justify-content: space-between;
@@ -19,47 +19,77 @@ body, html {
     overflow-y: auto;
 }
 
-/* Même chose ici pour éviter les conflits */
-.myposts-posts-container {
+/* Zone des posts */
+.posts-container {
     width: 60%;
     overflow-y: auto;
 }
 
-.myposts-search-bar {
-    position: relative;
-    top: 0;
-    background-color: #1b1f3b;
-    padding: 10px;
-    z-index: 1000;
+/* Barre de recherche */
+.search-bar {
+    margin-bottom: 15px;
 }
 
-.myposts-slideshow {
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+/* Zone du diaporama */
+.slideshow {
     width: 35%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.myposts-slideshow-image {
+.slideshow-image {
     width: 90%;
     max-height: 400px;
     border-radius: 10px;
 }
 
-.myposts-post {
+/* Style d'un post */
+.post {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 15px;
     margin: 10px 0;
     border-radius: 8px;
-    cursor: pointer;
+    position: relative;
 }
 
-.myposts-post-title h2 {
+/* Header du post (titre + bouton de suppression) */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-header h2 {
     color: #06e2cc;
     margin: 0;
 }
 
-.myposts-no-posts {
+/* Bouton de suppression */
+.delete-button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
+/* Message quand il n'y a pas de posts */
+.no-posts {
     text-align: center;
     font-style: italic;
 }
